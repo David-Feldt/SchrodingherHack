@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <title>H.A.C.K.S</title>
+  </head>
+  <body >
+  <div class="">
+    <h1>Asteroid Simulator</h1>
+      <h4>By: Alex, Barry, Richard, David</h4>
+
+  <div id="glowscript" class="glowscript">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <link type="text/css" href="https://s3.amazonaws.com/glowscript/css/redmond/2.1/jquery-ui.custom.css" rel="stylesheet" />
+  <link type="text/css" href="https://s3.amazonaws.com/glowscript/css/ide.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css"> 
+  <script type="text/javascript" src="https://s3.amazonaws.com/glowscript/lib/jquery/2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://s3.amazonaws.com/glowscript/lib/jquery/2.1/jquery-ui.custom.min.js"></script>
+  <script type="text/javascript" src="https://s3.amazonaws.com/glowscript/package/glow.3.0.min.js"></script>
+  <script type="text/javascript" src="https://s3.amazonaws.com/glowscript/package/RSrun.3.0.min.js"></script>
+  <script type="text/javascript"><!--//--><![CDATA[//><!--
+
+  // START JAVASCRIPT
+  ;(function() {;
+  var RS_modules = {};
+  RS_modules.pythonize = {};
+
+  (function(){
+      function strings() {
+          var string_funcs, exclude, name;
+          string_funcs = set("capitalize strip lstrip rstrip islower isupper isspace lower upper swapcase center count endswith startswith find rfind index rindex format join ljust rjust partition rpartition replace split rsplit splitlines zfill".split(" "));
+          if (!arguments.length) {
+              exclude = (function(){
+                  var s = RS_set();
+                  s.jsset.add("split");
+                  s.jsset.add("replace");
+                  return s;
+              })();
+          } else if (arguments[0]) {
+              exclude = Array.prototype.slice.call(arguments);
+          } else {
+              exclude = null;
+          }
+          if (exclude) {
+              string_funcs = string_funcs.difference(set(exclude));
+          }
+          var RS_Iter0 = string_funcs;
+          RS_Iter0 = ((typeof RS_Iter0[Symbol.iterator] === "function") ? (RS_Iter0 instanceof Map ? RS_Iter0.keys() : RS_Iter0) : Object.keys(RS_Iter0));
+          for (var RS_Index0 of RS_Iter0) {
+              name = RS_Index0;
+              (RS_expr_temp = String.prototype)[(typeof name === "number" && name < 0) ? RS_expr_temp.length + name : name] = (RS_expr_temp = RS_str.prototype)[(typeof name === "number" && name < 0) ? RS_expr_temp.length + name : name];
+          }
+      };
+      if (!strings.__module__) Object.defineProperties(strings, {
+          __module__ : {value: "pythonize"}
+      });
+
+      RS_modules.pythonize.strings = strings;
+  })();
+  async function __main__() {
+  "use strict";
+
+      var version, display, vector, print, arange, __name__, type, scene, RS_ls, G, sunRadius, earthRadius, eDistance, sun, earth, giant, dwarf, dt, r, F;
+      version = RS_list_decorate([ "3.0", "glowscript" ]);
+      Array.prototype['+'] = function(r) {return this.concat(r)}
+      Array.prototype['*'] = function(r) {return __array_times_number(this, r)}
+      window.__GSlang = "vpython";
+      display = canvas;
+      vector = vec;
+      print = GSprint;
+      arange = range;
+      __name__ = "__main__";
+      type = pytype;
+      scene = canvas();
+      var strings = RS_modules.pythonize.strings;
+
+      strings();
+      "2";
+      scene.caption = "Test Solar System";
+      "3";
+      scene.forward = vector(0, .3["-u"](), 1["-u"]());
+      "5";
+      G = 6.7e-11;
+      "6";
+      sunRadius = 69634e4;
+      "7";
+      earthRadius = 6371e3;
+      "8";
+      eDistance = 15e5;
+      "10";
+      sun = RS_interpolate_kwargs.call(this, sphere, [RS_desugar_kwargs({pos: vector(0, 0, 0), radius: sunRadius, color: color.orange})]);
+      "11";
+      earth = RS_interpolate_kwargs.call(this, sphere, [RS_desugar_kwargs({pos: vector(0, 0, eDistance), radius: earthRadius, color: color.blue})]);
+      "13";
+      giant = RS_interpolate_kwargs.call(this, sphere, [RS_desugar_kwargs({pos: vector(1e11["-u"](), 0, 0), radius: 2e10, color: color.red, make_trail: true, trail_type: "points", interval: 10, retain: 50})]);
+      "15";
+      giant.mass = 2e30;
+      "16";
+      giant.p = vector(0, 0, 1e4["-u"]())["*"](giant.mass);
+      "18";
+      earth.mass = 5.9722e24;
+      "20";
+      dwarf = RS_interpolate_kwargs.call(this, sphere, [RS_desugar_kwargs({pos: vector(15e10, 0, 0), radius: 1e10, color: color.yellow, make_trail: true, interval: 10, retain: 50})]);
+      "22";
+      dwarf.mass = 1e30;
+      "23";
+      dwarf.p = giant.p["-u"]();
+      "25";
+      dt = 1e5;
+      "26";
+      while (true) {
+          "27";
+          (await rate(200));
+          "28";
+          r = dwarf.pos["-"](giant.pos);
+          "29";
+          F = G["*"](giant.mass)["*"](dwarf.mass)["*"](r.hat)["/"](GS_power(mag(r), 2));
+          "30";
+          giant.p = giant.p["+"](F["*"](dt));
+          "31";
+          dwarf.p = dwarf.p["-"](F["*"](dt));
+          "32";
+          giant.pos = giant.pos["+"](giant.p["/"](giant.mass)["*"](dt));
+          "33";
+          dwarf.pos = dwarf.pos["+"](dwarf.p["/"](dwarf.mass)["*"](dt));
+      }
+  };
+  if (!__main__.__module__) Object.defineProperties(__main__, {
+      __module__ : {value: null}
+  });
+
+  ;$(function(){ window.__context = { glowscript_container: $("#glowscript").removeAttr("id") }; __main__() })})()
+  // END JAVASCRIPT
+
+  //--><!]]></script>
+  </div>
+  </div>
+  </body>
+</html>
