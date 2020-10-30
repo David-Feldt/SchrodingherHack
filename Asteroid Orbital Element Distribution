@@ -1,0 +1,28 @@
+from numpy import loadtxt
+from matplotlib.pyplot import plot, show,xlabel,ylabel,xlim, figure,axvline
+import os
+os.getcwd()
+os.chdir('C:\\Users\\16477\\Desktop\\')
+
+data = loadtxt("Asteroid_Updated.txt")
+
+semi_major_axis = data[:,0]
+eccentricity = data[:,1]
+
+figure(figsize=(20,10))
+plot(semi_major_axis, eccentricity, "ro", marker=".",markersize=0.05)
+axvline(x=1.7)
+axvline(x=2.0)
+axvline(x=2.1)
+axvline(x=2.3)
+axvline(x=2.5)
+axvline(x=2.8)
+axvline(x=3.26)
+axvline(x=3.7)
+axvline(x=4.2)
+axvline(x=5.05)
+axvline(x=5.4)
+xlabel("Semi-major axis")
+ylabel("Eccentricity")
+xlim(0,5.5)
+show()
